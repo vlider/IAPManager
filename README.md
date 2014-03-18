@@ -13,16 +13,21 @@ Drag IAPManager.xcodeproj into project tree, then open Project settings->Build P
 Now you are ready to use IAPManager!
 
 Include header
-##import "IAPManager/IAPManager.h"
+```
+#import "IAPManager/IAPManager.h"
+```
 
 Specify bundleId and versionNumber. Hardcode them instead of using values from Info.plist file
 [IAPManager sharedInstanse].bundleId = @"com.companyname.productname";
 [IAPManager sharedInstanse].versionString = @"1.0";
 
-Specify list of porductIds by using followed method:
+Specify list of porductIds by using followed methods:
+```
 addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase:
-
+addObserver:forProductsWithIds:performOnSuccessfulPurchase:performOnFailedPurchase:
+```
 Example:
+```
 [[IAPManager sharedInstanse] addObserver:self forProductWithId:@"remove_advertisement" performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction) {
         
         //Handle successful purchase here
@@ -30,8 +35,21 @@ Example:
         
         //Handle failed purchase here
     }];
-    
-After setting bundleId, versionString, adding blocks for observing call loadStoreWithCompletion to fetch available products. As a result compeltion block will be called with list of requested products.
+```    
+```
+[[IAPManager sharedInstanse] addObserver:self forProductsWithIds:@[@"remove_advertisement", @"get_10_skins"] performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction) {
+        //Handle successful purchase here
+    } performOnFailedPurchase:^(SKPaymentTransaction *transaction) {
+        //Handle failed purchase here
+    }];
+```
+After setting bundleId, versionString, adding blocks for observing call loadStoreWithCompletion to fetch available products. As a result compeltion block will be called with list of requested products:
+```
+[[IAPManager sharedInstanse] loadStoreWithCompletion:^(NSArray *validProducts, NSArray *invalidProductIds) {
+    }];
+```
 
 Placing purchase:
+```
 [[IAPManager sharedInstanse] placePaymentForProductWithId:@"remove_advertisement"];
+```
