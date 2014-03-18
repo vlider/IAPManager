@@ -13,7 +13,7 @@ Drag IAPManager.xcodeproj into project tree, then open Project settings->Build P
 Now you are ready to use IAPManager!
 
 Include header
-#import "IAPManager/IAPManager.h"
+\#import "IAPManager/IAPManager.h"
 
 Specify bundleId and versionNumber. Hardcode them instead of using values from Info.plist file
 [IAPManager sharedInstanse].bundleId = @"com.companyname.productname";
