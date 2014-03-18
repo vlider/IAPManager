@@ -14,23 +14,58 @@
 		9032FD4918C9114E004AC96B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD4818C9114E004AC96B /* main.m */; };
 		9032FD4D18C9114E004AC96B /* STAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD4C18C9114E004AC96B /* STAppDelegate.m */; };
 		9032FD4F18C9114E004AC96B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9032FD4E18C9114E004AC96B /* Images.xcassets */; };
-		9032FD5618C9114F004AC96B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9032FD5518C9114F004AC96B /* XCTest.framework */; };
-		9032FD5718C9114F004AC96B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9032FD3C18C9114E004AC96B /* Foundation.framework */; };
-		9032FD5818C9114F004AC96B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9032FD4018C9114E004AC96B /* UIKit.framework */; };
-		9032FD6018C9114F004AC96B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9032FD5E18C9114F004AC96B /* InfoPlist.strings */; };
-		9032FD6218C9114F004AC96B /* IAPManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6118C9114F004AC96B /* IAPManagerTests.m */; };
 		9032FD6D18C91198004AC96B /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6C18C91198004AC96B /* IAPManager.m */; };
+		906F8BE118D76A8C000265B7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BDE18D76A7B000265B7 /* libcrypto.a */; };
+		906F8BE318D76EEF000265B7 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
+		906F8BE818D78C30000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
+		906F8BEA18D78C38000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
+		906F8BF018D86736000265B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9032FD3C18C9114E004AC96B /* Foundation.framework */; };
+		906F8C1118D8675D000265B7 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6C18C91198004AC96B /* IAPManager.m */; };
+		906F8C1218D8676F000265B7 /* IAPManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9032FD6B18C91198004AC96B /* IAPManager.h */; };
+		906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
+		906F8C1618D8678B000265B7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BDE18D76A7B000265B7 /* libcrypto.a */; };
+		906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
+		906F8C1818D86795000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
+		906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BEF18D86736000265B7 /* libiapmanager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		9032FD5918C9114F004AC96B /* PBXContainerItemProxy */ = {
+		906F8BDD18D76A7B000265B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
+			remoteInfo = crypto;
+		};
+		906F8C1418D86784000265B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
+			remoteInfo = crypto;
+		};
+		906F8C1918D867B9000265B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9032FD3118C9114E004AC96B /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9032FD3818C9114E004AC96B;
-			remoteInfo = IAPManager;
+			remoteGlobalIDString = 906F8BEE18D86736000265B7;
+			remoteInfo = iapmanager;
 		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		906F8BED18D86736000265B7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in CopyFiles */,
+				906F8C1218D8676F000265B7 /* IAPManager.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9032FD3918C9114E004AC96B /* IAPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAPManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,13 +79,15 @@
 		9032FD4B18C9114E004AC96B /* STAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = STAppDelegate.h; sourceTree = "<group>"; };
 		9032FD4C18C9114E004AC96B /* STAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = STAppDelegate.m; sourceTree = "<group>"; };
 		9032FD4E18C9114E004AC96B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		9032FD5418C9114F004AC96B /* IAPManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IAPManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9032FD5518C9114F004AC96B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		9032FD5D18C9114F004AC96B /* IAPManagerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IAPManagerTests-Info.plist"; sourceTree = "<group>"; };
-		9032FD5F18C9114F004AC96B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		9032FD6118C9114F004AC96B /* IAPManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IAPManagerTests.m; sourceTree = "<group>"; };
 		9032FD6B18C91198004AC96B /* IAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAPManager.h; path = IAPManager/IAPManager.h; sourceTree = "<group>"; };
 		9032FD6C18C91198004AC96B /* IAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAPManager.m; path = IAPManager/IAPManager.m; sourceTree = "<group>"; };
+		906F8BD918D76A7A000265B7 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openssl.xcodeproj; path = ../openssl/openssl.xcodeproj; sourceTree = "<group>"; };
+		906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleIncRootCertificate.cer; path = ../IAPManager/AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		906F8BE718D78C30000265B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		906F8BE918D78C38000265B7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		906F8BEF18D86736000265B7 /* libiapmanager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiapmanager.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		906F8BF318D86736000265B7 /* iapmanager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iapmanager-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,19 +95,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */,
+				906F8BE118D76A8C000265B7 /* libcrypto.a in Frameworks */,
+				906F8BEA18D78C38000265B7 /* StoreKit.framework in Frameworks */,
+				906F8BE818D78C30000265B7 /* Security.framework in Frameworks */,
 				9032FD3F18C9114E004AC96B /* CoreGraphics.framework in Frameworks */,
 				9032FD4118C9114E004AC96B /* UIKit.framework in Frameworks */,
 				9032FD3D18C9114E004AC96B /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9032FD5118C9114F004AC96B /* Frameworks */ = {
+		906F8BEC18D86736000265B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9032FD5618C9114F004AC96B /* XCTest.framework in Frameworks */,
-				9032FD5818C9114F004AC96B /* UIKit.framework in Frameworks */,
-				9032FD5718C9114F004AC96B /* Foundation.framework in Frameworks */,
+				906F8C1818D86795000265B7 /* Security.framework in Frameworks */,
+				906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */,
+				906F8C1618D8678B000265B7 /* libcrypto.a in Frameworks */,
+				906F8BF018D86736000265B7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,8 +122,9 @@
 		9032FD3018C9114E004AC96B = {
 			isa = PBXGroup;
 			children = (
+				906F8BD918D76A7A000265B7 /* openssl.xcodeproj */,
 				9032FD4218C9114E004AC96B /* IAPManager */,
-				9032FD5B18C9114F004AC96B /* IAPManagerTests */,
+				906F8BF118D86736000265B7 /* iapmanager */,
 				9032FD3B18C9114E004AC96B /* Frameworks */,
 				9032FD3A18C9114E004AC96B /* Products */,
 			);
@@ -91,7 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				9032FD3918C9114E004AC96B /* IAPManager.app */,
-				9032FD5418C9114F004AC96B /* IAPManagerTests.xctest */,
+				906F8BEF18D86736000265B7 /* libiapmanager.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,6 +142,8 @@
 		9032FD3B18C9114E004AC96B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				906F8BE918D78C38000265B7 /* StoreKit.framework */,
+				906F8BE718D78C30000265B7 /* Security.framework */,
 				9032FD3C18C9114E004AC96B /* Foundation.framework */,
 				9032FD3E18C9114E004AC96B /* CoreGraphics.framework */,
 				9032FD4018C9114E004AC96B /* UIKit.framework */,
@@ -131,20 +176,27 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		9032FD5B18C9114F004AC96B /* IAPManagerTests */ = {
+		906F8BDA18D76A7A000265B7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9032FD6118C9114F004AC96B /* IAPManagerTests.m */,
-				9032FD5C18C9114F004AC96B /* Supporting Files */,
+				906F8BDE18D76A7B000265B7 /* libcrypto.a */,
 			);
-			path = IAPManagerTests;
+			name = Products;
 			sourceTree = "<group>";
 		};
-		9032FD5C18C9114F004AC96B /* Supporting Files */ = {
+		906F8BF118D86736000265B7 /* iapmanager */ = {
 			isa = PBXGroup;
 			children = (
-				9032FD5D18C9114F004AC96B /* IAPManagerTests-Info.plist */,
-				9032FD5E18C9114F004AC96B /* InfoPlist.strings */,
+				906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */,
+				906F8BF218D86736000265B7 /* Supporting Files */,
+			);
+			path = iapmanager;
+			sourceTree = "<group>";
+		};
+		906F8BF218D86736000265B7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				906F8BF318D86736000265B7 /* iapmanager-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -163,29 +215,30 @@
 			buildRules = (
 			);
 			dependencies = (
+				906F8C1A18D867B9000265B7 /* PBXTargetDependency */,
 			);
 			name = IAPManager;
 			productName = IAPManager;
 			productReference = 9032FD3918C9114E004AC96B /* IAPManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9032FD5318C9114F004AC96B /* IAPManagerTests */ = {
+		906F8BEE18D86736000265B7 /* iapmanager */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9032FD6818C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManagerTests" */;
+			buildConfigurationList = 906F8C0B18D86736000265B7 /* Build configuration list for PBXNativeTarget "iapmanager" */;
 			buildPhases = (
-				9032FD5018C9114F004AC96B /* Sources */,
-				9032FD5118C9114F004AC96B /* Frameworks */,
-				9032FD5218C9114F004AC96B /* Resources */,
+				906F8BEB18D86736000265B7 /* Sources */,
+				906F8BEC18D86736000265B7 /* Frameworks */,
+				906F8BED18D86736000265B7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9032FD5A18C9114F004AC96B /* PBXTargetDependency */,
+				906F8C1518D86784000265B7 /* PBXTargetDependency */,
 			);
-			name = IAPManagerTests;
-			productName = IAPManagerTests;
-			productReference = 9032FD5418C9114F004AC96B /* IAPManagerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = iapmanager;
+			productName = iapmanager;
+			productReference = 906F8BEF18D86736000265B7 /* libiapmanager.a */;
+			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
@@ -196,11 +249,6 @@
 				CLASSPREFIX = ST;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Spire LLC";
-				TargetAttributes = {
-					9032FD5318C9114F004AC96B = {
-						TestTargetID = 9032FD3818C9114E004AC96B;
-					};
-				};
 			};
 			buildConfigurationList = 9032FD3418C9114E004AC96B /* Build configuration list for PBXProject "IAPManager" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -212,13 +260,29 @@
 			mainGroup = 9032FD3018C9114E004AC96B;
 			productRefGroup = 9032FD3A18C9114E004AC96B /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 906F8BDA18D76A7A000265B7 /* Products */;
+					ProjectRef = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9032FD3818C9114E004AC96B /* IAPManager */,
-				9032FD5318C9114F004AC96B /* IAPManagerTests */,
+				906F8BEE18D86736000265B7 /* iapmanager */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		906F8BDE18D76A7B000265B7 /* libcrypto.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcrypto.a;
+			remoteRef = 906F8BDD18D76A7B000265B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9032FD3718C9114E004AC96B /* Resources */ = {
@@ -226,15 +290,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9032FD4718C9114E004AC96B /* InfoPlist.strings in Resources */,
+				906F8BE318D76EEF000265B7 /* AppleIncRootCertificate.cer in Resources */,
 				9032FD4F18C9114E004AC96B /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9032FD5218C9114F004AC96B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9032FD6018C9114F004AC96B /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,21 +308,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9032FD5018C9114F004AC96B /* Sources */ = {
+		906F8BEB18D86736000265B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9032FD6218C9114F004AC96B /* IAPManagerTests.m in Sources */,
+				906F8C1118D8675D000265B7 /* IAPManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9032FD5A18C9114F004AC96B /* PBXTargetDependency */ = {
+		906F8C1518D86784000265B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9032FD3818C9114E004AC96B /* IAPManager */;
-			targetProxy = 9032FD5918C9114F004AC96B /* PBXContainerItemProxy */;
+			name = crypto;
+			targetProxy = 906F8C1418D86784000265B7 /* PBXContainerItemProxy */;
+		};
+		906F8C1A18D867B9000265B7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 906F8BEE18D86736000265B7 /* iapmanager */;
+			targetProxy = 906F8C1918D867B9000265B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -274,14 +336,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				9032FD4618C9114E004AC96B /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		9032FD5E18C9114F004AC96B /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				9032FD5F18C9114F004AC96B /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -364,13 +418,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Dmytro Hirsch (B95WKR3H7S)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Dmytro Hirsch (B95WKR3H7S)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAPManager/IAPManager-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../openssl/openssl/include",
+				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D3603238-E91B-444C-AB02-96518D5DC2D0";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -380,51 +439,59 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IAPManager/IAPManager-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)/../openssl/openssl/include",
+				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		9032FD6918C9114F004AC96B /* Debug */ = {
+		906F8C0C18D86736000265B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IAPManager.app/IAPManager";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				DSTROOT = /tmp/iapmanager.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IAPManager/IAPManager-Prefix.pch";
+				GCC_PREFIX_HEADER = "iapmanager/iapmanager-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "IAPManagerTests/IAPManagerTests-Info.plist";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../openssl/openssl/include/\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		9032FD6A18C9114F004AC96B /* Release */ = {
+		906F8C0D18D86736000265B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IAPManager.app/IAPManager";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-				);
+				DSTROOT = /tmp/iapmanager.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "IAPManager/IAPManager-Prefix.pch";
-				INFOPLIST_FILE = "IAPManagerTests/IAPManagerTests-Info.plist";
+				GCC_PREFIX_HEADER = "iapmanager/iapmanager-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"\"$(SRCROOT)/../openssl/openssl/include/\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -449,14 +516,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9032FD6818C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManagerTests" */ = {
+		906F8C0B18D86736000265B7 /* Build configuration list for PBXNativeTarget "iapmanager" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9032FD6918C9114F004AC96B /* Debug */,
-				9032FD6A18C9114F004AC96B /* Release */,
+				906F8C0C18D86736000265B7 /* Debug */,
+				906F8C0D18D86736000265B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

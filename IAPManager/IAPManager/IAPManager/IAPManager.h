@@ -8,6 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString const *kReceiptBundleIdentifier;
+extern NSString const *kReceiptBundleIdentifierData;
+extern NSString const *kReceiptVersion;
+extern NSString const *kReceiptOpaqueValue;
+extern NSString const *kReceiptHash;
+extern NSString const *kReceiptInApp;
+extern NSString const *kReceiptOriginalVersion;
+extern NSString const *kReceiptExpirationDate;
+
+extern NSString const *kReceiptInAppQuantity;
+extern NSString const *kReceiptInAppProductIdentifier;
+extern NSString const *kReceiptInAppTransactionIdentifier;
+extern NSString const *kReceiptInAppPurchaseDate;
+extern NSString const *kReceiptInAppOriginalTransactionIdentifier;
+extern NSString const *kReceiptInAppOriginalPurchaseDate;
+extern NSString const *kReceiptInAppSubscriptionExpirationDate;
+extern NSString const *kReceiptInAppCancellationDate;
+extern NSString const *kReceiptInAppWebOrderLineItemID;
+
 @class SKPaymentTransaction;
 
 typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProductIds);
@@ -15,7 +34,11 @@ typedef void (^transactionCompletionBlock)(SKPaymentTransaction *transaction);
 
 @interface IAPManager : NSObject
 
+@property (nonatomic, strong) NSString *bundleId;
+@property (nonatomic, strong) NSString *versionString;
+
 @property (nonatomic, readonly, strong) NSArray *validProducts;
+@property (nonatomic, readonly, strong) NSArray *invalidProductIds;
 
 + (instancetype)sharedInstanse;
 

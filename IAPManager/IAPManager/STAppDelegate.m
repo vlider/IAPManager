@@ -20,20 +20,42 @@
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     
-    //Call this method to observe purchases for specific productId
+    /*
+     * Here is an example of IAPManager usage
+     */
+    
+    /* Set bundleId and versionString same as specified in info.plist file. 
+     * IMPORTANT: Hard code this two values(@"com.companyname.productname", @"1.0", etc)
+     * IMPORTANT: do not use [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifierKey"];
+     * IMPORTANT: do not use [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
+     */
+    [IAPManager sharedInstanse].bundleId = @"<#HARDCODED_BUNDLEI_ID#>";
+    [IAPManager sharedInstanse].versionString = @"<#HARDCODED_VERSION#>";
+    
+    /*
+     * Call this method to observe purchases for specific productId.
+     * If purchase succeeds then first block will be performed.
+     * If purchase fails or validation fails then failure block will be called
+     */
     [[IAPManager sharedInstanse] addObserver:self forProductWithId:@"<#IAP prductId#>" performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction) {
         
-        //Handle successful purchase
+        //Handle successful purchase here
     } performOnFailedPurchase:^(SKPaymentTransaction *transaction) {
         
-        //Handle failed purchase
+        //Handle failed purchase here
     }];
     
-    //Request for available products
+    /*
+     * Request for products
+     * IMPORTANT: call this method only after adding observers for purchases.
+     */
     [[IAPManager sharedInstanse] loadStoreWithCompletion:^(NSArray *validProducts, NSArray *invalidProductIds) {
         
-        //To place order use placePaymentForProductWithId method
-        [[IAPManager sharedInstanse] placePaymentForProductWithId:@"<#IAP prductId#>"];
+        /*
+         * After successful loading store, if all products are valid you can make purchases.
+         * To place order use placePaymentForProductWithId method like followed:
+         * [[IAPManager sharedInstanse] placePaymentForProductWithId:@"<#IAP prductId#>"];
+         */        
     }];
 
     return YES;
