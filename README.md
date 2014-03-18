@@ -7,7 +7,7 @@ At the moment only local receipt verification implemented.
 Additional thanks for Ruotger Skupin who shared receipt parsing and validation code here https://github.com/roddi/ValidateStoreReceipt
 
 How it works:
-First of all clone the project. Do git submodule init && git submodule update to fetch submodules. OpenSSL-Xcode prodived by ZETETIC LLC(https://github.com/sqlcipher/openssl-xcode) used by IAPManager. So please follow instructions for successful build openssl.
+First of all clone the project. OpenSSL-Xcode submodule project used, prodived by ZETETIC LLC(https://github.com/sqlcipher/openssl-xcode) used by IAPManager. So please follow instructions for successful build openssl.
 IAPManager have 2 targets, one for fast testing of InApp Purchases, another one for using within your project.
 Drag IAPManager.xcodeproj into project tree, then open Project settings->Build Phases and add into Target Dependencies iapmanger. Then Open Link Binary With Libraries and add libiapmanager.a here.
 Now you are ready to use IAPManager!
