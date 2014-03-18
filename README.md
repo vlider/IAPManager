@@ -4,10 +4,6 @@ IAPManager
 Easy to use util for integrating InApp Purchases into iOS projects.
 At the moment only local receipt verification implemented.
 
-After cloning the project do not forget to run git submodule init && git submodule update to fetch third-party projects .
-
-OpenSSL-Xcode used as submodule, so for successful building please follow instructions from https://github.com/sqlcipher/openssl-xcode.git
-
 Additional thanks for Ruotger Skupin who shared receipt parsing and validation code here https://github.com/roddi/ValidateStoreReceipt
 
 How it works:
