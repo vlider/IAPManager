@@ -825,6 +825,15 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                 }
             }
         }
+    } else {
+        
+        @synchronized(self) {
+            
+            if (self.loadStoreCompletionBlock) {
+                
+                self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+            }
+        }
     }
 }
 
