@@ -844,25 +844,6 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 #pragma mark Purchase helpers
 #pragma mark -
 
-- (void)recordTransaction:(SKPaymentTransaction *)transaction {
-    
-//    @synchronized(self) {
-//    
-//        IAPurchase *purchase = [self.products objectForKey:transaction.payment.productIdentifier];
-//        NSAssert(nil != purchase, @"Invalid configuration. No accosiated records for transaction with productId=%@", transaction.payment.productIdentifier);
-//    }
-//    
-//    if ([transaction respondsToSelector:@selector(transactionReceipt)]) {
-//        NSString *receiptKey = transaction.payment.productIdentifier;
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//#pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Wdeprecated"
-//        [defaults setValue:transaction.transactionReceipt forKey:receiptKey ];
-//#pragma clang diagnostic pop        
-//        [defaults synchronize];
-//    }
-}
-
 - (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful {
     
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -940,23 +921,6 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     });
 }
 
-- (void)completeTransaction:(SKPaymentTransaction *)transaction {
-    
-    [self recordTransaction:transaction];
-    [self finishTransaction:transaction wasSuccessful:YES];
-}
-
-- (void)restoreTransaction:(SKPaymentTransaction *)transaction {
-    
-    [self recordTransaction:transaction.originalTransaction];
-    [self finishTransaction:transaction wasSuccessful:YES];
-}
-
-- (void)failedTransaction:(SKPaymentTransaction *)transaction {
-    
-    [self finishTransaction:transaction wasSuccessful:NO];
-}
-
 #pragma mark -
 #pragma mark SKPaymentTransactionObserver methods
 #pragma mark -
@@ -968,15 +932,15 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         switch (transaction.transactionState) {
                 
             case SKPaymentTransactionStatePurchased:
-                [self completeTransaction:transaction];
+                [self finishTransaction:transaction wasSuccessful:YES];
                 break;
                 
             case SKPaymentTransactionStateFailed:
-                [self failedTransaction:transaction];
+                [self finishTransaction:transaction wasSuccessful:NO];
                 break;
                 
             case SKPaymentTransactionStateRestored:
-                [self restoreTransaction:transaction];
+                [self finishTransaction:transaction wasSuccessful:YES];
                 break;
                 
             default:
@@ -1035,13 +999,13 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 - (void)requestDidFinish:(SKRequest *)request {
     
     Class requestClass = NSClassFromString(@"SKReceiptRefreshRequest");
-    if ([request isKindOfClass:requestClass]) {
+    if (requestClass && [request isKindOfClass:requestClass]) {
      
         NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
         if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
             
 #if DEBUG
-            NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
+            NSLog(@"Unable to refresh appStoreReceipt at this time. Any purchase will be failed");
 #endif
         } else {
             
@@ -1059,10 +1023,10 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     
     Class requestClass = NSClassFromString(@"SKReceiptRefreshRequest");
-    if ([request isKindOfClass:requestClass]) {
+    if (requestClass && [request isKindOfClass:requestClass]) {
         
 #if DEBUG
-        NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
+        NSLog(@"Unable to refresh appStoreReceipt at this time. Any purchase will be failed");
 #endif
         
         @synchronized(self) {
