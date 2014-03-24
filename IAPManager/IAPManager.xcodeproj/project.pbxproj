@@ -423,7 +423,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../openssl/openssl/include",
+					"\"$(SRCROOT)/../openssl-xcode/openssl/include\"",
 				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -443,7 +443,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"$(SRCROOT)/../openssl/openssl/include",
+					"\"$(SRCROOT)/../openssl-xcode/openssl/include\"",
 				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
