@@ -53,7 +53,7 @@ Example:
         //Handle failed purchase here
     }];
 ```
-After setting bundleId, versionString, adding blocks for observing call ```loadStoreWithCompletion``` to fetch available products. As a result compeltion block will be called with list of requested products and invalid products ids:
+After setting bundleId, versionString, adding blocks for observing call ```loadStoreWithCompletion``` to fetch available products. As a result compeltion block will be called with list of requested products and invalid products ids, if any:
 ```
 [[IAPManager sharedInstanse] loadStoreWithCompletion:^(NSArray *validProducts, NSArray *invalidProductIds) {
     }];
