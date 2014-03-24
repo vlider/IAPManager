@@ -8,6 +8,7 @@ Additional thanks for Ruotger Skupin who shared receipt parsing and validation c
 
 How it works:
 First of all clone the project. OpenSSL-Xcode submodule project used for building openssl lib, prodived by ZETETIC LLC(https://github.com/sqlcipher/openssl-xcode).
+
 IAPManager have 2 targets, one for fast testing of InApp Purchases, another one for using within your project.
 For testing simple do following:
 - In STAppDelegate.m replace ```<#HARDCODED_BUNDLEI_ID#>``` and ```<#HARDCODED_VERSION#>``` with values from your project
@@ -67,4 +68,7 @@ Placing purchase:
 ```
 [[IAPManager sharedInstanse] placePaymentForProductWithId:@"remove_advertisement"];
 ```
-On success or failure one of the blocks specified in ```addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase:``` will be called
+On success or failure one of the blocks specified in ```addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase:``` will be called.
+
+If you requested for productId that you did not specify in one of ```addObserver:…``` methods, or for some reason ```loadStoreWithCompletion``` return not empty ```invalidProductIds``` then calling ```placePaymentForProductWithId:``` with one of the values from that list will return ```NO```. Payment will not be queued, so ```…performOnFailedPurchase:``` block also not called.
+Please check return value from ```placePaymentForProductWithId:```, or call ```canPlacePaymentForProductWithId:``` to make sure that specified product can be purchased.
