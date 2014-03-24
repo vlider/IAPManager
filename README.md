@@ -25,6 +25,8 @@ Include header
 #import "IAPManager.h"
 ```
 
+Do not forget to add ```AppleIncRootCertificate.cer``` file into ```Copy Bundle Resources```
+
 Specify bundleId and versionString. Hardcode them instead of reading values from Info.plist file:
 ```
 [IAPManager sharedInstanse].bundleId = @"com.companyname.productname";
