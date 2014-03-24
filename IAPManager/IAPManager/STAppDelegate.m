@@ -40,7 +40,7 @@
     [[IAPManager sharedInstanse] addObserver:self forProductWithId:@"<#IAP prductId#>" performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction) {
         
         //Handle successful purchase here
-    } performOnFailedPurchase:^(SKPaymentTransaction *transaction) {
+    } performOnFailedPurchase:^(SKPaymentTransaction *transaction, BOOL cancelled) {
         
         //Handle failed purchase here
     }];

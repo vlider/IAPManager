@@ -59,12 +59,10 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"WebItemId";
 #define INAPP_WEBORDER      1711
 #define INAPP_CANCEL_DATE   1712
 
-typedef void (^onPurchaseBlock)(SKPaymentTransaction *);
-
 @interface IAPObserver : NSObject
 @property (nonatomic, strong) NSObject *purchaseObserver;
 @property (nonatomic, copy) onPurchaseBlock onSuccessPurchaseBlock;
-@property (nonatomic, copy) onPurchaseBlock onFailPurchaseBlock;
+@property (nonatomic, copy) onFailPurchaseBlock onFailPurchaseBlock;
 @end
 
 @implementation IAPObserver
@@ -147,7 +145,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     return _gSharedIAPManagerInstanse;
 }
 
-- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(void (^)(SKPaymentTransaction *))onSuccessBlock performOnFailedPurchase:(void (^)(SKPaymentTransaction *))onFailureBlock {
+- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock {
     
     NSParameterAssert(nil != observer);
     NSParameterAssert(productId != nil);
@@ -183,7 +181,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     }
 }
 
-- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(transactionCompletionBlock)onSuccessBlock performOnFailedPurchase:(transactionCompletionBlock)onFailureBlock {
+- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock {
     
     NSParameterAssert(nil != observer);
     NSParameterAssert(productIds != nil);
@@ -911,7 +909,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                         
                         if (observer.onFailPurchaseBlock) {
                             
-                            observer.onFailPurchaseBlock(transaction);
+                            observer.onFailPurchaseBlock(transaction, NO);
                         }
                     }
                 }
@@ -922,7 +920,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                     
                     if (observer.onFailPurchaseBlock) {
                         
-                        observer.onFailPurchaseBlock(transaction);
+                        observer.onFailPurchaseBlock(transaction, (SKErrorPaymentCancelled == transaction.error.code));
                     }
                 }
             }
@@ -1034,15 +1032,19 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 
 - (void)request:(SKRequest *)request didFailWithError:(NSError *)error {
     
-#if DEBUG
-    NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
-#endif
-    
-    @synchronized(self) {
+    Class requestClass = NSClassFromString(@"SKReceiptRefreshRequest");
+    if ([request isKindOfClass:requestClass]) {
         
-        if (self.loadStoreCompletionBlock) {
+#if DEBUG
+        NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
+#endif
+        
+        @synchronized(self) {
             
-            self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+            if (self.loadStoreCompletionBlock) {
+                
+                self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+            }
         }
     }
 }

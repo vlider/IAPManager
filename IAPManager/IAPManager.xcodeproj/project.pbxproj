@@ -15,7 +15,6 @@
 		9032FD4D18C9114E004AC96B /* STAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD4C18C9114E004AC96B /* STAppDelegate.m */; };
 		9032FD4F18C9114E004AC96B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9032FD4E18C9114E004AC96B /* Images.xcassets */; };
 		9032FD6D18C91198004AC96B /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6C18C91198004AC96B /* IAPManager.m */; };
-		906F8BE118D76A8C000265B7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BDE18D76A7B000265B7 /* libcrypto.a */; };
 		906F8BE318D76EEF000265B7 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
 		906F8BE818D78C30000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
 		906F8BEA18D78C38000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
@@ -23,33 +22,33 @@
 		906F8C1118D8675D000265B7 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6C18C91198004AC96B /* IAPManager.m */; };
 		906F8C1218D8676F000265B7 /* IAPManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9032FD6B18C91198004AC96B /* IAPManager.h */; };
 		906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
-		906F8C1618D8678B000265B7 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BDE18D76A7B000265B7 /* libcrypto.a */; };
 		906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
 		906F8C1818D86795000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
 		906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BEF18D86736000265B7 /* libiapmanager.a */; };
+		90DB763418E0518000946C38 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DB763118E0516500946C38 /* libcrypto.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		906F8BDD18D76A7B000265B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
-			remoteInfo = crypto;
-		};
-		906F8C1418D86784000265B7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
-			remoteInfo = crypto;
-		};
 		906F8C1918D867B9000265B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9032FD3118C9114E004AC96B /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 906F8BEE18D86736000265B7;
 			remoteInfo = iapmanager;
+		};
+		90DB763018E0516500946C38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
+			remoteInfo = crypto;
+		};
+		90DB763218E0517C00946C38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
+			remoteInfo = crypto;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -82,12 +81,12 @@
 		9032FD5518C9114F004AC96B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		9032FD6B18C91198004AC96B /* IAPManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IAPManager.h; path = IAPManager/IAPManager.h; sourceTree = "<group>"; };
 		9032FD6C18C91198004AC96B /* IAPManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IAPManager.m; path = IAPManager/IAPManager.m; sourceTree = "<group>"; };
-		906F8BD918D76A7A000265B7 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openssl.xcodeproj; path = ../openssl/openssl.xcodeproj; sourceTree = "<group>"; };
 		906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = AppleIncRootCertificate.cer; path = ../IAPManager/AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		906F8BE718D78C30000265B7 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		906F8BE918D78C38000265B7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		906F8BEF18D86736000265B7 /* libiapmanager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiapmanager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		906F8BF318D86736000265B7 /* iapmanager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iapmanager-Prefix.pch"; sourceTree = "<group>"; };
+		90DB762C18E0516500946C38 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openssl.xcodeproj; path = "../openssl-xcode/openssl.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +95,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */,
-				906F8BE118D76A8C000265B7 /* libcrypto.a in Frameworks */,
 				906F8BEA18D78C38000265B7 /* StoreKit.framework in Frameworks */,
 				906F8BE818D78C30000265B7 /* Security.framework in Frameworks */,
 				9032FD3F18C9114E004AC96B /* CoreGraphics.framework in Frameworks */,
@@ -109,9 +107,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90DB763418E0518000946C38 /* libcrypto.a in Frameworks */,
 				906F8C1818D86795000265B7 /* Security.framework in Frameworks */,
 				906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */,
-				906F8C1618D8678B000265B7 /* libcrypto.a in Frameworks */,
 				906F8BF018D86736000265B7 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -122,7 +120,7 @@
 		9032FD3018C9114E004AC96B = {
 			isa = PBXGroup;
 			children = (
-				906F8BD918D76A7A000265B7 /* openssl.xcodeproj */,
+				90DB762C18E0516500946C38 /* openssl.xcodeproj */,
 				9032FD4218C9114E004AC96B /* IAPManager */,
 				906F8BF118D86736000265B7 /* iapmanager */,
 				9032FD3B18C9114E004AC96B /* Frameworks */,
@@ -176,14 +174,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		906F8BDA18D76A7A000265B7 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				906F8BDE18D76A7B000265B7 /* libcrypto.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		906F8BF118D86736000265B7 /* iapmanager */ = {
 			isa = PBXGroup;
 			children = (
@@ -199,6 +189,14 @@
 				906F8BF318D86736000265B7 /* iapmanager-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		90DB762D18E0516500946C38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				90DB763118E0516500946C38 /* libcrypto.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,7 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				906F8C1518D86784000265B7 /* PBXTargetDependency */,
+				90DB763318E0517C00946C38 /* PBXTargetDependency */,
 			);
 			name = iapmanager;
 			productName = iapmanager;
@@ -262,8 +260,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 906F8BDA18D76A7A000265B7 /* Products */;
-					ProjectRef = 906F8BD918D76A7A000265B7 /* openssl.xcodeproj */;
+					ProductGroup = 90DB762D18E0516500946C38 /* Products */;
+					ProjectRef = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -275,11 +273,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		906F8BDE18D76A7B000265B7 /* libcrypto.a */ = {
+		90DB763118E0516500946C38 /* libcrypto.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libcrypto.a;
-			remoteRef = 906F8BDD18D76A7B000265B7 /* PBXContainerItemProxy */;
+			remoteRef = 90DB763018E0516500946C38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -319,15 +317,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		906F8C1518D86784000265B7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = crypto;
-			targetProxy = 906F8C1418D86784000265B7 /* PBXContainerItemProxy */;
-		};
 		906F8C1A18D867B9000265B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 906F8BEE18D86736000265B7 /* iapmanager */;
 			targetProxy = 906F8C1918D867B9000265B7 /* PBXContainerItemProxy */;
+		};
+		90DB763318E0517C00946C38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = crypto;
+			targetProxy = 90DB763218E0517C00946C38 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -467,7 +465,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl/openssl/include/\"",
+					"\"$(SRCROOT)/../openssl-xcode/openssl/include/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";
@@ -486,7 +484,7 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl/openssl/include/\"",
+					"\"$(SRCROOT)/../openssl-xcode/openssl/include/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_LDFLAGS = "-ObjC";

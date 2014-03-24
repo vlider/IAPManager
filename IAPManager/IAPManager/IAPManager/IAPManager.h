@@ -30,7 +30,8 @@ extern NSString const *kReceiptInAppWebOrderLineItemID;
 @class SKPaymentTransaction;
 
 typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProductIds);
-typedef void (^transactionCompletionBlock)(SKPaymentTransaction *transaction);
+typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction);
+typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL cancelled);
 
 @interface IAPManager : NSObject
 
@@ -42,9 +43,8 @@ typedef void (^transactionCompletionBlock)(SKPaymentTransaction *transaction);
 
 + (instancetype)sharedInstanse;
 
-- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(transactionCompletionBlock)onSuccessBlock performOnFailedPurchase:(transactionCompletionBlock)onFailureBlock;
-- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(transactionCompletionBlock)onSuccessBlock performOnFailedPurchase:(transactionCompletionBlock)onFailureBlock;
-//- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId actionOnSuccessfulPurchase:(SEL)onSuccess actionOnFailedPurchase:(SEL)onFailure;
+- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock;
+- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock;
 
 - (void)removeObserver:(NSObject *)observer forProductWithId:(NSString *)productId;
 
