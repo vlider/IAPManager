@@ -1,4 +1,4 @@
 
 [submodule "openssl-xcode"]
 	path = openssl
-	url = https://github.com/sqlcipher/openssl-xcode
+	url = https://github.com/sqlcipher/openssl-xcode.git

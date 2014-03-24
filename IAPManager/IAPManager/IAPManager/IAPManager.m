@@ -7,6 +7,9 @@
 //
 
 #import "IAPManager.h"
+
+#import <Security/Security.h>
+#import <StoreKit/StoreKit.h>
 #include <openssl/pkcs7.h>
 #include <openssl/objects.h>
 #include <openssl/sha.h>
@@ -55,9 +58,6 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"WebItemId";
 #define INAPP_SUBEXP_DATE   1708
 #define INAPP_WEBORDER      1711
 #define INAPP_CANCEL_DATE   1712
-
-@import Security;
-@import StoreKit;
 
 typedef void (^onPurchaseBlock)(SKPaymentTransaction *);
 
@@ -1010,19 +1010,23 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 
 - (void)requestDidFinish:(SKRequest *)request {
     
-    NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
-
-#if DEBUG
-        NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
-#endif
-    } else {
-        
-        @synchronized(self) {
+    Class requestClass = NSClassFromString(@"SKReceiptRefreshRequest");
+    if ([request isKindOfClass:requestClass]) {
+     
+        NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
             
-            if (self.loadStoreCompletionBlock) {
+#if DEBUG
+            NSLog(@"Unable to refresh appStoreReceipt at this time. Purchases validation will be skipped");
+#endif
+        } else {
+            
+            @synchronized(self) {
                 
-                self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+                if (self.loadStoreCompletionBlock) {
+                    
+                    self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+                }
             }
         }
     }
