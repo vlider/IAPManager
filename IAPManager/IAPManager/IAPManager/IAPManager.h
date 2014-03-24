@@ -29,6 +29,7 @@ extern NSString const *kReceiptInAppWebOrderLineItemID;
 
 @class SKPaymentTransaction;
 
+typedef void (^onPurchasesRestoredBlock)(NSError *error, BOOL cancelled);
 typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProductIds);
 typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction);
 typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL cancelled);
@@ -49,7 +50,7 @@ typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL canc
 - (void)removeObserver:(NSObject *)observer forProductWithId:(NSString *)productId;
 
 - (void)loadStoreWithCompletion:(onStoreLoadedBlock)completionBlock;
-- (void)restorePurchases;
+- (void)restorePurchasesWithCompletion:(onPurchasesRestoredBlock)completionBlock;
 - (BOOL)canMakePurchases;
 
 - (BOOL)placePaymentForProductWithId:(NSString *)productId;

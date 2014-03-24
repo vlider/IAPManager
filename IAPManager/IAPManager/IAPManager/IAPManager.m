@@ -122,6 +122,7 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"WebItemId";
 @property (nonatomic, strong) NSMapTable *products;
 @property (nonatomic, strong) SKProductsRequest *productsRequest;
 @property (nonatomic, copy) onStoreLoadedBlock loadStoreCompletionBlock;
+@property (nonatomic, copy) onPurchasesRestoredBlock retoreCompletionBlock;
 @property (nonatomic, strong) NSArray *validProducts;
 @property (nonatomic, strong) NSArray *invalidProductIds;
 @end
@@ -240,7 +241,9 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     [productsRequest start];
 }
 
-- (void)restorePurchases {
+- (void)restorePurchasesWithCompletion:(onPurchasesRestoredBlock)completionBlock {
+    
+    self.retoreCompletionBlock = completionBlock;
     
     [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
 }
@@ -951,13 +954,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 
 - (void)failedTransaction:(SKPaymentTransaction *)transaction {
     
-    if (SKErrorPaymentCancelled != transaction.error.code) {
-        
-        [self finishTransaction:transaction wasSuccessful:NO];
-    } else {
-        
-        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    }
+    [self finishTransaction:transaction wasSuccessful:NO];
 }
 
 #pragma mark -
@@ -1009,6 +1006,26 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 //                break;
 //        }
 //    }
+}
+
+- (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {
+    
+#if DEBUG
+    NSLog(@"Restore completed transactions failed with error: %@", error);
+#endif
+    
+    if (self.retoreCompletionBlock) {
+        
+        self.retoreCompletionBlock(error, (SKErrorPaymentCancelled == error.code));
+    }
+}
+
+- (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue {
+    
+    if (self.retoreCompletionBlock) {
+        
+        self.retoreCompletionBlock(nil, NO);
+    }
 }
 
 #pragma mark -
