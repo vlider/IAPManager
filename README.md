@@ -7,17 +7,25 @@ At the moment only local receipt verification implemented.
 Additional thanks for Ruotger Skupin who shared receipt parsing and validation code here https://github.com/roddi/ValidateStoreReceipt
 
 How it works:
-First of all clone the project. OpenSSL-Xcode submodule project used, prodived by ZETETIC LLC(https://github.com/sqlcipher/openssl-xcode) used by IAPManager. So please follow instructions for successful build openssl.
+First of all clone the project. OpenSSL-Xcode submodule project used for building openssl lib, prodived by ZETETIC LLC(https://github.com/sqlcipher/openssl-xcode).
 IAPManager have 2 targets, one for fast testing of InApp Purchases, another one for using within your project.
+For testing simple do following:
+- In STAppDelegate.m replace ```<#HARDCODED_BUNDLEI_ID#>``` and ```<#HARDCODED_VERSION#>``` with values from your project
+- In STAppDelegate.m replace ```<#IAP prductId#>``` with porductId that you want to test
+- In STAppDelegate.m add following line into ```loadStoreWithCompletion:``` block to place your purchase: ```[[IAPManager sharedInstanse] placePaymentForProductWithId:@"<#IAP prductId#>"];```. Do not forget to use the same ```<#IAP prductId#>``` that was used in ```addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase``` call
+- In IAPManager-Info.plist change ```Bundle version string, short``` and ```Bundle identifier``` to your own project values. Also change ```Provisioning Profile``` in IAPManager target ```Build Settings``` to your profile
+- Run IAPManager target. Do not forget to use test iTunes account. After fetching products you will see purchase confirmation alert.
+
+###Intergration into your project
 Drag IAPManager.xcodeproj into project tree, then open Project settings->Build Phases and add into Target Dependencies iapmanger. Then Open Link Binary With Libraries and add libiapmanager.a here.
 Now you are ready to use IAPManager!
 
 Include header
 ```
-#import "IAPManager/IAPManager.h"
+#import "IAPManager.h"
 ```
 
-Specify bundleId and versionNumber. Hardcode them instead of reading values from Info.plist file:
+Specify bundleId and versionString. Hardcode them instead of reading values from Info.plist file:
 ```
 [IAPManager sharedInstanse].bundleId = @"com.companyname.productname";
 [IAPManager sharedInstanse].versionString = @"1.0";
@@ -47,6 +55,11 @@ After setting bundleId, versionString, adding blocks for observing call ```loadS
 [[IAPManager sharedInstanse] loadStoreWithCompletion:^(NSArray *validProducts, NSArray *invalidProductIds) {
     }];
 ```
+###IMPORTANT
+Place
+```[IAPManager sharedInstanse].bundleId = …```
+```[IAPManager sharedInstanse].versionString = …```
+and all purchase observers before calling ```loadStoreWithCompletion```
 
 Placing purchase:
 ```
