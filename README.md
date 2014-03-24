@@ -65,3 +65,4 @@ Placing purchase:
 ```
 [[IAPManager sharedInstanse] placePaymentForProductWithId:@"remove_advertisement"];
 ```
+On success or failure one of the blocks specified in ```addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase:``` will be called
