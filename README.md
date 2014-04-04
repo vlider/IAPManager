@@ -2,7 +2,9 @@ IAPManager
 ==========
 
 Easy to use util for integrating InApp Purchases into iOS projects.
-At the moment only local receipt verification implemented.
+Supports:
+- purchases validation(local validation only)
+- Apple-hosted content downloading
 
 Additional thanks for Ruotger Skupin who shared receipt parsing and validation code here https://github.com/roddi/ValidateStoreReceipt
 
@@ -58,6 +60,14 @@ After setting bundleId, versionString, adding blocks for observing call ```loadS
 [[IAPManager sharedInstanse] loadStoreWithCompletion:^(NSArray *validProducts, NSArray *invalidProductIds) {
     }];
 ```
+###Adding observer for purchases with Apple-hosted content
+If you have IAP with content hosted on Apple's servers, use ```addObserver:forProductWithId:performOnSuccessfulPurchase:performOnFailedPurchase:performOnContentDownloaded:``` or ```addObserver:forProductsWithIds:performOnSuccessfulPurchase:performOnFailedPurchase:performOnContentDownloaded:```.
+Once purchase succeed ```performOnSuccessfulPurchase``` block will be called, and any associated IAP downloads starts immediately. When download finishes - ```performOnContentDownloaded``` fires.
+
+For many reasons download may fail. It can be out of disk space error, or lost internet, etc. For restoring unfinished downloads call ```restoreUnfinishedDownloads``` method. After download finishes you will receive result in ```performOnContentDownloaded``` block that was defined by one of the ```addObserver:…``` methods.
+
+Do not forget to check error and contentURL parameters. ```error != nil``` or ```contentURL == nil``` means that download failed due to some reason.
+
 ###IMPORTANT
 Place
 ```[IAPManager sharedInstanse].bundleId = …```
