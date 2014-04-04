@@ -20,8 +20,8 @@
 		906F8BEA18D78C38000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
 		906F8BF018D86736000265B7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9032FD3C18C9114E004AC96B /* Foundation.framework */; };
 		906F8C1118D8675D000265B7 /* IAPManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9032FD6C18C91198004AC96B /* IAPManager.m */; };
-		906F8C1218D8676F000265B7 /* IAPManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 9032FD6B18C91198004AC96B /* IAPManager.h */; };
-		906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
+		906F8C1218D8676F000265B7 /* IAPManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 9032FD6B18C91198004AC96B /* IAPManager.h */; };
+		906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in Copy Files */ = {isa = PBXBuildFile; fileRef = 906F8BE218D76EEF000265B7 /* AppleIncRootCertificate.cer */; };
 		906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
 		906F8C1818D86795000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
 		906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BEF18D86736000265B7 /* libiapmanager.a */; };
@@ -53,15 +53,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		906F8BED18D86736000265B7 /* CopyFiles */ = {
+		906F8BED18D86736000265B7 /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in CopyFiles */,
-				906F8C1218D8676F000265B7 /* IAPManager.h in CopyFiles */,
+				906F8C1318D8677E000265B7 /* AppleIncRootCertificate.cer in Copy Files */,
+				906F8C1218D8676F000265B7 /* IAPManager.h in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -202,9 +203,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9032FD3818C9114E004AC96B /* IAPManager */ = {
+		9032FD3818C9114E004AC96B /* IAPManagerTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9032FD6518C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManager" */;
+			buildConfigurationList = 9032FD6518C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManagerTest" */;
 			buildPhases = (
 				9032FD3518C9114E004AC96B /* Sources */,
 				9032FD3618C9114E004AC96B /* Frameworks */,
@@ -215,7 +216,7 @@
 			dependencies = (
 				906F8C1A18D867B9000265B7 /* PBXTargetDependency */,
 			);
-			name = IAPManager;
+			name = IAPManagerTest;
 			productName = IAPManager;
 			productReference = 9032FD3918C9114E004AC96B /* IAPManager.app */;
 			productType = "com.apple.product-type.application";
@@ -226,7 +227,7 @@
 			buildPhases = (
 				906F8BEB18D86736000265B7 /* Sources */,
 				906F8BEC18D86736000265B7 /* Frameworks */,
-				906F8BED18D86736000265B7 /* CopyFiles */,
+				906F8BED18D86736000265B7 /* Copy Files */,
 			);
 			buildRules = (
 			);
@@ -266,7 +267,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				9032FD3818C9114E004AC96B /* IAPManager */,
+				9032FD3818C9114E004AC96B /* IAPManagerTest */,
 				906F8BEE18D86736000265B7 /* iapmanager */,
 			);
 		};
@@ -505,7 +506,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9032FD6518C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManager" */ = {
+		9032FD6518C9114F004AC96B /* Build configuration list for PBXNativeTarget "IAPManagerTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9032FD6618C9114F004AC96B /* Debug */,
