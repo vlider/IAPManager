@@ -69,6 +69,7 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"WebItemId";
 @property (nonatomic, strong) NSObject *purchaseObserver;
 @property (nonatomic, copy) onPurchaseBlock onSuccessPurchaseBlock;
 @property (nonatomic, copy) onFailPurchaseBlock onFailPurchaseBlock;
+@property (nonatomic, copy) onDownloadBlock onDownloadBlock;
 @end
 
 @implementation IAPObserver
@@ -154,13 +155,23 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 
 - (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock {
     
+    [self addObserver:observer forProductWithId:productId performOnSuccessfulPurchase:onSuccessBlock performOnFailedPurchase:onFailureBlock performOnContentDownloaded:NULL];
+}
+
+- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock {
+    
+    [self addObserver:observer forProductsWithIds:productIds performOnSuccessfulPurchase:onSuccessBlock performOnFailedPurchase:onFailureBlock performOnContentDownloaded:NULL];
+}
+
+- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock performOnContentDownloaded:(onDownloadBlock)onDownloadBlock {
+    
     NSParameterAssert(nil != observer);
     NSParameterAssert(productId != nil);
     NSParameterAssert(onSuccessBlock != NULL);
     NSParameterAssert(onFailureBlock != NULL);
     
     @synchronized(self) {
-     
+        
         IAPurchase *purchase = [self.products objectForKey:productId];
         if (nil == purchase) {
             
@@ -184,11 +195,12 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
             [purchase.observers addObject:purchaseObserver];
             purchaseObserver.onSuccessPurchaseBlock = onSuccessBlock;
             purchaseObserver.onFailPurchaseBlock = onFailureBlock;
+            purchaseObserver.onDownloadBlock = onDownloadBlock;
         }
     }
 }
 
-- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock {
+- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock performOnContentDownloaded:(onDownloadBlock)onDownloadBlock {
     
     NSParameterAssert(nil != observer);
     NSParameterAssert(productIds != nil);
@@ -200,7 +212,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         NSSet *temp = [NSSet setWithArray:productIds];
         for (NSString *productId in temp) {
             
-            [self addObserver:observer forProductWithId:productId performOnSuccessfulPurchase:onSuccessBlock performOnFailedPurchase:onFailureBlock];
+            [self addObserver:observer forProductWithId:productId performOnSuccessfulPurchase:onSuccessBlock performOnFailedPurchase:onFailureBlock performOnContentDownloaded:onDownloadBlock];
         }
     }
 }
@@ -293,6 +305,22 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     }
     
     return result;
+}
+
+- (void)restoreUnfinishedDownloads {
+    
+    NSMutableArray *downloads = [@[] mutableCopy];
+    
+    NSArray *transactions = [SKPaymentQueue defaultQueue].transactions;
+    for (SKPaymentTransaction *transaction in transactions) {
+        
+        if (transaction.downloads) {
+            
+            [downloads addObjectsFromArray:transaction.downloads];
+        }
+    }
+    
+    [[SKPaymentQueue defaultQueue] resumeDownloads:downloads];
 }
 
 #pragma mark -
@@ -852,8 +880,6 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 
 - (void)finishTransaction:(SKPaymentTransaction *)transaction wasSuccessful:(BOOL)wasSuccessful {
     
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    
     __block IAPurchase *purchase = nil;
     @synchronized(self) {
     
@@ -900,6 +926,11 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                     
                     if (valid) {
                         
+                        if (transaction.downloads) {
+                            
+                            [[SKPaymentQueue defaultQueue] startDownloads:transaction.downloads];
+                        }
+                        
                         if (observer.onSuccessPurchaseBlock) {
                             
                             observer.onSuccessPurchaseBlock(transaction);
@@ -922,6 +953,15 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                         observer.onFailPurchaseBlock(transaction, (SKErrorPaymentCancelled == transaction.error.code));
                     }
                 }
+            }
+            
+            /*
+             * Download all Apple-hosted content before finishing the transaction.
+             * After a transaction is complete, its download objects can no longer be used.
+             */
+            if (0 == transaction.downloads.count) {
+                
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             }
         }
     });
@@ -956,26 +996,58 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedDownloads:(NSArray *)downloads {
-
-#warning NOT IMPLEMENTED
-//    for (SKDownload *download in downloads) {
-//        
-//        if (download.error) {
-//#if DEBUG
-//            NSLog(@"Download failed for %@", download.transaction.payment.productIdentifier);
-//#endif
-//        }
-//        
-//        switch (download.downloadState) {
-//            case SKDownloadStateFinished: {
-//                
-//                NSURL *contentURL = download.contentURL;
-//                break;
-//            }
-//            default:
-//                break;
-//        }
-//    }
+    
+    for (SKDownload *download in downloads) {
+        
+        IAPurchase *purchase = nil;
+        @synchronized(self) {
+            
+            purchase = [self.products objectForKey:download.transaction.payment.productIdentifier];
+            NSAssert(nil != purchase, @"Invalid configuration. No accosiated records for download with productId=%@", download.transaction.payment.productIdentifier);
+        }
+        
+        BOOL downloadFailed = ((download.downloadState == SKDownloadStateCancelled) || (download.downloadState == SKDownloadStateFailed) || download.error);
+        BOOL finishedOrFailed = ((download.downloadState == SKDownloadStateFinished) || downloadFailed);
+        NSURL *contentURL = download.contentURL;
+        
+        if (downloadFailed) {
+            
+#if DEBUG
+            NSLog(@"Download failed for %@", download.transaction.payment.productIdentifier);
+#endif
+        } else {
+            
+            /*
+             * Checking weather all downloads completed successfully.
+             * If so then transaction can be finished
+             */
+            BOOL transactionCanBeFinished = YES;
+            SKPaymentTransaction *transaction = download.transaction;
+            for (SKDownload *item in transaction.downloads) {
+                
+                transactionCanBeFinished &= (item.downloadState == SKDownloadStateFinished);
+            }
+            
+            if (transactionCanBeFinished) {
+                
+                [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+            }
+        }
+        
+        if (finishedOrFailed) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                for (IAPObserver *observer in purchase.observers) {
+                    
+                    if (observer.onDownloadBlock) {
+                        
+                        observer.onDownloadBlock(download, contentURL, download.error);
+                    }
+                }
+            });
+        }
+    }
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error {

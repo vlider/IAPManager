@@ -34,10 +34,12 @@ extern NSString const *kReceiptInAppCancellationDate;
 extern NSString const *kReceiptInAppWebOrderLineItemID;
 
 @class SKPaymentTransaction;
+@class SKDownload;
 
 typedef void (^onPurchasesRestoredBlock)(NSError *error, BOOL cancelled);
 typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProductIds);
 typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction);
+typedef void (^onDownloadBlock)(SKDownload *download, NSURL *contentURL, NSError *error);
 typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL cancelled);
 
 @interface IAPManager : NSObject
@@ -53,6 +55,9 @@ typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL canc
 - (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock;
 - (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock;
 
+- (void)addObserver:(NSObject *)observer forProductWithId:(NSString *)productId performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock performOnContentDownloaded:(onDownloadBlock)onDownloadBlock;
+- (void)addObserver:(NSObject *)observer forProductsWithIds:(NSArray *)productIds performOnSuccessfulPurchase:(onPurchaseBlock)onSuccessBlock performOnFailedPurchase:(onFailPurchaseBlock)onFailureBlock performOnContentDownloaded:(onDownloadBlock)onDownloadBlock;
+
 - (void)removeObserver:(NSObject *)observer forProductWithId:(NSString *)productId;
 
 - (void)loadStoreWithCompletion:(onStoreLoadedBlock)completionBlock;
@@ -61,4 +66,6 @@ typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL canc
 
 - (BOOL)placePaymentForProductWithId:(NSString *)productId;
 - (BOOL)canPlacePaymentForProductWithId:(NSString *)productId;
+
+- (void)restoreUnfinishedDownloads;
 @end
