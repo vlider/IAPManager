@@ -849,8 +849,9 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
             
             //request for receipt if it is not available
-            SKReceiptRefreshRequest *request = [[SKReceiptRefreshRequest alloc] initWithReceiptProperties:nil];
-            request.delegate = self;
+            Class receiptClass = NSClassFromString(@"SKReceiptRefreshRequest");
+            id request = [[receiptClass alloc] initWithReceiptProperties:nil];
+            [request setDelegate:self];
             [request start];
         } else {
             
