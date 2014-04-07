@@ -366,7 +366,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
  * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-- (BOOL)validateReceipt:(NSData *)receiptData forTransaction:(SKPaymentTransaction *)transaction {
+- (BOOL)validateReceipt:(NSData *)receiptData forTransaction:(SKPaymentTransaction *)transaction receipt:(NSDictionary **)parsedReceipt {
     
     NSParameterAssert(nil != receiptData);
     
@@ -607,6 +607,11 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         appleRootCertificate = NULL;
     }
 
+    if (parsedReceipt) {
+        
+        *parsedReceipt = result;
+    }
+    
     return valid;
 }
 
@@ -894,6 +899,8 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
          
             if (wasSuccessful) {
                 
+                NSDictionary *parsedReceipt = nil;
+                
                 NSString *bundleId = [[NSBundle mainBundle] objectForInfoDictionaryKey:(__bridge NSString *)kCFBundleIdentifierKey];
                 NSString *versionString = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
                 
@@ -919,7 +926,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                     valid &= (nil != receipt);
                     if (valid) {
                         
-                        valid = [self validateReceipt:receipt forTransaction:transaction];
+                        valid = [self validateReceipt:receipt forTransaction:transaction receipt:&parsedReceipt];
                     }
                 }
                 
@@ -934,7 +941,7 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
                         
                         if (observer.onSuccessPurchaseBlock) {
                             
-                            observer.onSuccessPurchaseBlock(transaction);
+                            observer.onSuccessPurchaseBlock(transaction, parsedReceipt);
                         }
                     } else {
                         

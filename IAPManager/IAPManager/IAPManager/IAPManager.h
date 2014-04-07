@@ -38,7 +38,7 @@ extern NSString const *kReceiptInAppWebOrderLineItemID;
 
 typedef void (^onPurchasesRestoredBlock)(NSError *error, BOOL cancelled);
 typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProductIds);
-typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction);
+typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction, NSDictionary *receipt);
 typedef void (^onDownloadBlock)(SKDownload *download, NSURL *contentURL, NSError *error);
 typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL cancelled);
 

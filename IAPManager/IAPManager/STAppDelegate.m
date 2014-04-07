@@ -43,7 +43,7 @@
      * If purchase succeeds then first block will be performed.
      * If purchase fails or validation fails then failure block will be called
      */
-    [[IAPManager sharedInstanse] addObserver:self forProductWithId:@"<#IAP prductId#>" performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction) {
+    [[IAPManager sharedInstanse] addObserver:self forProductWithId:@"<#IAP prductId#>" performOnSuccessfulPurchase:^(SKPaymentTransaction *transaction, NSDictionary *receipt) {
         
         //Handle successful purchase here
     } performOnFailedPurchase:^(SKPaymentTransaction *transaction, BOOL cancelled) {
