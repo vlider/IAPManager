@@ -41,6 +41,7 @@ typedef void (^onStoreLoadedBlock)(NSArray *validProducts, NSArray *invalidProdu
 typedef void (^onPurchaseBlock)(SKPaymentTransaction *transaction, NSDictionary *receipt);
 typedef void (^onDownloadBlock)(SKDownload *download, NSURL *contentURL, NSError *error);
 typedef void (^onFailPurchaseBlock)(SKPaymentTransaction *transaction, BOOL cancelled);
+typedef void (^onReceiptDownloadedBlock)(BOOL downloaded, NSURL *receiptURL);
 
 @interface IAPManager : NSObject
 

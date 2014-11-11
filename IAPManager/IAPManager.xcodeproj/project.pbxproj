@@ -25,7 +25,6 @@
 		906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE918D78C38000265B7 /* StoreKit.framework */; };
 		906F8C1818D86795000265B7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BE718D78C30000265B7 /* Security.framework */; };
 		906F8C1B18D867DB000265B7 /* libiapmanager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 906F8BEF18D86736000265B7 /* libiapmanager.a */; };
-		90DB763418E0518000946C38 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90DB763118E0516500946C38 /* libcrypto.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +34,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 906F8BEE18D86736000265B7;
 			remoteInfo = iapmanager;
-		};
-		90DB763018E0516500946C38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 9069D28C0FCE659A0042E34C;
-			remoteInfo = crypto;
-		};
-		90DB763218E0517C00946C38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 9069D28B0FCE659A0042E34C;
-			remoteInfo = crypto;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -68,7 +53,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9032FD3918C9114E004AC96B /* IAPManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = IAPManager.app; path = IAPManagerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9032FD3918C9114E004AC96B /* IAPManagerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IAPManagerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9032FD3C18C9114E004AC96B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9032FD3E18C9114E004AC96B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9032FD4018C9114E004AC96B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -87,7 +72,6 @@
 		906F8BE918D78C38000265B7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		906F8BEF18D86736000265B7 /* libiapmanager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiapmanager.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		906F8BF318D86736000265B7 /* iapmanager-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iapmanager-Prefix.pch"; sourceTree = "<group>"; };
-		90DB762C18E0516500946C38 /* openssl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = openssl.xcodeproj; path = "../openssl-xcode/openssl.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,7 +92,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90DB763418E0518000946C38 /* libcrypto.a in Frameworks */,
 				906F8C1818D86795000265B7 /* Security.framework in Frameworks */,
 				906F8C1718D86790000265B7 /* StoreKit.framework in Frameworks */,
 				906F8BF018D86736000265B7 /* Foundation.framework in Frameworks */,
@@ -121,7 +104,6 @@
 		9032FD3018C9114E004AC96B = {
 			isa = PBXGroup;
 			children = (
-				90DB762C18E0516500946C38 /* openssl.xcodeproj */,
 				9032FD4218C9114E004AC96B /* IAPManager */,
 				906F8BF118D86736000265B7 /* iapmanager */,
 				9032FD3B18C9114E004AC96B /* Frameworks */,
@@ -132,7 +114,7 @@
 		9032FD3A18C9114E004AC96B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9032FD3918C9114E004AC96B /* IAPManager.app */,
+				9032FD3918C9114E004AC96B /* IAPManagerTest.app */,
 				906F8BEF18D86736000265B7 /* libiapmanager.a */,
 			);
 			name = Products;
@@ -192,14 +174,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		90DB762D18E0516500946C38 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				90DB763118E0516500946C38 /* libcrypto.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -218,7 +192,7 @@
 			);
 			name = IAPManagerTest;
 			productName = IAPManager;
-			productReference = 9032FD3918C9114E004AC96B /* IAPManager.app */;
+			productReference = 9032FD3918C9114E004AC96B /* IAPManagerTest.app */;
 			productType = "com.apple.product-type.application";
 		};
 		906F8BEE18D86736000265B7 /* iapmanager */ = {
@@ -232,7 +206,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				90DB763318E0517C00946C38 /* PBXTargetDependency */,
 			);
 			name = iapmanager;
 			productName = iapmanager;
@@ -259,12 +232,6 @@
 			mainGroup = 9032FD3018C9114E004AC96B;
 			productRefGroup = 9032FD3A18C9114E004AC96B /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 90DB762D18E0516500946C38 /* Products */;
-					ProjectRef = 90DB762C18E0516500946C38 /* openssl.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				9032FD3818C9114E004AC96B /* IAPManagerTest */,
@@ -272,16 +239,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		90DB763118E0516500946C38 /* libcrypto.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libcrypto.a;
-			remoteRef = 90DB763018E0516500946C38 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		9032FD3718C9114E004AC96B /* Resources */ = {
@@ -322,11 +279,6 @@
 			isa = PBXTargetDependency;
 			target = 906F8BEE18D86736000265B7 /* iapmanager */;
 			targetProxy = 906F8C1918D867B9000265B7 /* PBXContainerItemProxy */;
-		};
-		90DB763318E0517C00946C38 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = crypto;
-			targetProxy = 90DB763218E0517C00946C38 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -415,6 +367,7 @@
 		9032FD6618C9114F004AC96B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
@@ -424,11 +377,15 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl-xcode/openssl/include\"",
+					"\"$(SRCROOT)/../openssl/include/\"",
 				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../openssl/lib\"";
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = "\"$(SRCROOT)/../openssl/lib/libcrypto-device.a\"";
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = "\"$(SRCROOT)/../openssl/lib/libcrypto-simulator.a\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -436,6 +393,7 @@
 		9032FD6718C9114F004AC96B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
@@ -444,10 +402,12 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl-xcode/openssl/include\"",
+					"\"$(SRCROOT)/../openssl/include/\"",
 				);
 				INFOPLIST_FILE = "IAPManager/IAPManager-Info.plist";
+				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../openssl/lib\"";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -466,11 +426,22 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl-xcode/openssl/include/\"",
+					"\"$(SRCROOT)/../openssl/include/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl\"",
+				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl/libcrypto-device.a\"",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl/libcrypto-simulator.a\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -486,10 +457,21 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
-					"\"$(SRCROOT)/../openssl-xcode/openssl/include/\"",
+					"\"$(SRCROOT)/../openssl/include/\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl\"",
+				);
+				"OTHER_LDFLAGS[sdk=iphoneos*]" = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl/libcrypto-device.a\"",
+				);
+				"OTHER_LDFLAGS[sdk=iphonesimulator*]" = (
+					"-ObjC",
+					"\"$(SRCROOT)/../openssl/libcrypto-simulator.a\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

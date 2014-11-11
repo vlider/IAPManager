@@ -132,6 +132,7 @@ NSString *kReceiptInAppWebOrderLineItemID               = @"WebItemId";
 @property (nonatomic, copy) onPurchasesRestoredBlock retoreCompletionBlock;
 @property (nonatomic, strong) NSArray *validProducts;
 @property (nonatomic, strong) NSArray *invalidProductIds;
+@property (nonatomic, copy) onReceiptDownloadedBlock receiptDownloadedBlock;
 @end
 
 @implementation IAPManager
@@ -263,7 +264,10 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
     
     self.retoreCompletionBlock = completionBlock;
     
-    [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    [self checkIfReceiptIsDownloadedWithCompletion:^(BOOL downloaded, NSURL *receiptURL) {
+        
+        [[SKPaymentQueue defaultQueue] restoreCompletedTransactions];
+    }];
 }
 
 - (BOOL)canMakePurchases {
@@ -299,8 +303,11 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         result = (nil != product);
         if (result) {
             
-            SKPayment *payment = [SKPayment paymentWithProduct:product];
-            [[SKPaymentQueue defaultQueue] addPayment:payment];
+            [self checkIfReceiptIsDownloadedWithCompletion:^(BOOL downloaded, NSURL *receiptURL) {
+                
+                SKPayment *payment = [SKPayment paymentWithProduct:product];
+                [[SKPaymentQueue defaultQueue] addPayment:payment];
+            }];
         }
     }
     
@@ -811,6 +818,40 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 	return resultArray;
 }
 
+- (void)checkIfReceiptIsDownloadedWithCompletion:(onReceiptDownloadedBlock)completionBlock {
+    
+    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
+        
+        // Load resources for iOS 7 or later
+        NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
+        if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
+            
+            //request for receipt if it is not available
+            Class receiptClass = NSClassFromString(@"SKReceiptRefreshRequest");
+            id request = [[receiptClass alloc] initWithReceiptProperties:nil];
+            [request setDelegate:self];
+            [request start];
+            
+            @synchronized(self) {
+             
+                self.receiptDownloadedBlock = completionBlock;
+            }
+        } else {
+            
+            if (completionBlock) {
+                
+                completionBlock(YES, receiptURL);
+            }
+        }
+    } else {
+        
+        if (completionBlock) {
+            
+            completionBlock(YES, nil);
+        }
+    }
+}
+
 #pragma mark -
 #pragma mark SKproductsRequestDelegate methods
 #pragma mark -
@@ -845,37 +886,10 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         
         self.validProducts = validProducts;
         self.invalidProductIds = response.invalidProductIdentifiers;
-    }
-    
-    if (floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1) {
-
-        // Load resources for iOS 7 or later
-        NSURL *receiptURL = [[NSBundle mainBundle] appStoreReceiptURL];
-        if (![[NSFileManager defaultManager] fileExistsAtPath:receiptURL.path]) {
-            
-            //request for receipt if it is not available
-            Class receiptClass = NSClassFromString(@"SKReceiptRefreshRequest");
-            id request = [[receiptClass alloc] initWithReceiptProperties:nil];
-            [request setDelegate:self];
-            [request start];
-        } else {
-            
-            @synchronized(self) {
-             
-                if (self.loadStoreCompletionBlock) {
-                    
-                    self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
-                }
-            }
-        }
-    } else {
         
-        @synchronized(self) {
+        if (self.loadStoreCompletionBlock) {
             
-            if (self.loadStoreCompletionBlock) {
-                
-                self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
-            }
+            self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
         }
     }
 }
@@ -1093,13 +1107,22 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
 #if DEBUG
             NSLog(@"Unable to refresh appStoreReceipt at this time. Any purchase will be failed");
 #endif
+            
+            @synchronized(self) {
+                
+                if (self.receiptDownloadedBlock) {
+                    
+                    self.receiptDownloadedBlock(NO, nil);
+                }
+            }
+            
         } else {
             
             @synchronized(self) {
                 
-                if (self.loadStoreCompletionBlock) {
+                if (self.receiptDownloadedBlock) {
                     
-                    self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+                    self.receiptDownloadedBlock(YES, receiptURL);
                 }
             }
         }
@@ -1117,9 +1140,9 @@ static IAPManager *_gSharedIAPManagerInstanse = nil;
         
         @synchronized(self) {
             
-            if (self.loadStoreCompletionBlock) {
+            if (self.receiptDownloadedBlock) {
                 
-                self.loadStoreCompletionBlock(self.validProducts, self.invalidProductIds);
+                self.receiptDownloadedBlock(NO, nil);
             }
         }
     }
